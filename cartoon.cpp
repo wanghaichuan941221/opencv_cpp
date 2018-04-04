@@ -18,7 +18,7 @@ int main(int argc, char const *argv[]) {
   size_t i=0;
   cv::Mat img_temp;
   while(i<num_bilateral){
-    cv::bilateralFilter(img_color,img_temp,9,9,7);
+    cv::bilateralFilter(img_color,img_temp,9,9,9);
     img_color = img_temp;
     img_temp = cv::Mat::zeros(cv::Size(img_color.size()),CV_8UC1);
     i++;
@@ -41,7 +41,7 @@ int main(int argc, char const *argv[]) {
   // cv::putText(img_cartoon,"hello",cv::Point(100,100),//coordinates
   // cv::FONT_HERSHEY_PLAIN,100.0,cv::Scalar(0,0,0),1,2);
   //cv::namedWindow("img_color",cv::WINDOW_NORMAL);
-  cv::imwrite("jpg/meCartoon.jpg",img_cartoon);
+  cv::imwrite("jpg/Cartoon.jpg",img_cartoon);
   //cv::imshow("img_color",img_cartoon);
   //cv::waitKey(5000);
   return 0;
