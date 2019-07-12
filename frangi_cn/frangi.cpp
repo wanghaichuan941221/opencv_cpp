@@ -1,5 +1,6 @@
 #include "frangi.h"
 
+//计算图像在横向的gradient
 void FrangiFilterImpl::Gradient_x(const cv::Mat &src, cv::Mat &Dx) {
 	const int wd = src.rows, ht = src.cols;
 	for (int i = 0; i < wd; ++i) {
@@ -17,6 +18,7 @@ void FrangiFilterImpl::Gradient_x(const cv::Mat &src, cv::Mat &Dx) {
 	}
 }
 
+//计算图像在纵向的gradient
 void FrangiFilterImpl::Gradient_y(const cv::Mat &src, cv::Mat &Dy) {
 	const int wd = src.rows, ht = src.cols;
 	for (int i = 0; i < wd; ++i) {
@@ -35,6 +37,7 @@ void FrangiFilterImpl::Gradient_y(const cv::Mat &src, cv::Mat &Dy) {
 
 }
 
+////计算图像hessian数组的值
 void FrangiFilterImpl::Hessian_matrix(const cv::Mat &src, float sigma, cv::Mat &Dxx, cv::Mat &Dxy, cv::Mat &Dyy) {
 	const int wd = src.rows, ht = src.cols;
 
@@ -56,7 +59,7 @@ void FrangiFilterImpl::Hessian_matrix(const cv::Mat &src, float sigma, cv::Mat &
 }
 
 
-
+//计算特征值
 void FrangiFilterImpl::Eig2Image(cv::Mat Dxx, cv::Mat Dxy, cv::Mat Dyy, cv::Mat & lambda1, cv::Mat & lambda2)
 {
 	cv::Mat temp1;
@@ -66,6 +69,7 @@ void FrangiFilterImpl::Eig2Image(cv::Mat Dxx, cv::Mat Dxy, cv::Mat Dyy, cv::Mat 
 	lambda2 = (Dxx + Dyy) / 2 - temp1 / 2;
 
 }
+
 
 void FrangiFilterImpl::processImage(const cv::Mat & src, cv::Mat & dst)
 {
@@ -145,6 +149,22 @@ void FrangiFilterImpl::setBlack_ridge(bool black_ridge_)
 	black_ridge = black_ridge_;
 }
 
+
+/*
+    scale_start: float,minimal sigma
+	scale_end: float,maximum sigma
+    scale_step : float, optional
+        Step size between sigmas.
+    beta = beta1 : float, optional
+        Frangi correction constant that adjusts the filter's
+        sensitivity to deviation from a blob-like structure.
+    gamma = beta2 : float, optional
+        Frangi correction constant that adjusts the filter's
+        sensitivity to areas of high variance/texture/structure.
+    black_ridges : boolean, optional
+        When True (the default), the filter detects black ridges; when
+        False, it detects white ridges.
+ */
 cv::Ptr<FrangiFilter> createFrangiFilter(float sigma_start_, float sigma_end_, float sigma_step_, float beta1_, float beta2_, bool black_ridge_)
 {
 	cv::Ptr<FrangiFilter> frangiPointer = cv::makePtr<FrangiFilterImpl>();

@@ -1,6 +1,25 @@
 #include <cmath>
 #include <opencv2/opencv.hpp>
 
+
+/*
+Filter an image with the Frangi vesselness filter.
+
+This filter can be used to detect continuous ridges, e.g. vessels,
+wrinkles, rivers. It can be used to calculate the fraction of the
+whole image containing such objects.
+
+code Reference:
+
+[1] Frangi, A. F., Niessen, W. J., Vincken, K. L., & Viergever, M. A.
+        (1998,). Multiscale vessel enhancement filtering. In International
+        Conference on Medical Image Computing and Computer-Assisted
+        Intervention (pp. 130-137). Springer Berlin Heidelberg.
+        :DOI:`10.1007/BFb0056195`
+[2] Kroon, D. J.: Hessian based Frangi vesselness filter.
+[3] Ellis, D. G.: https://github.com/ellisdg/frangi3d/tree/master/frangi
+ */
+
 class FrangiFilter {
 private:
 	float sigma_start, sigma_end, sigma_step;
