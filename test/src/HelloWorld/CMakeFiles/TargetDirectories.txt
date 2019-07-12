@@ -1,3 +1,0 @@
-/home/haichuan/git/opencv_cpp/test/src/HelloWorld/CMakeFiles/edit_cache.dir
-/home/haichuan/git/opencv_cpp/test/src/HelloWorld/CMakeFiles/rebuild_cache.dir
-/home/haichuan/git/opencv_cpp/test/src/HelloWorld/CMakeFiles/HelloWorld.dir
